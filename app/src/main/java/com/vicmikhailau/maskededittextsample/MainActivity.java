@@ -2,10 +2,7 @@ package com.vicmikhailau.maskededittextsample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.vicmikhailau.maskededittext.MaskedEditText;
 import com.vicmikhailau.maskededittext.MaskedFormatter;
@@ -27,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * For getting unmasked text for MaskedEditText mEdtMaskedCustom just use mEdtMaskedCustom.getUnMaskedString().
-     * For getting unmasked text for default EditText with MaskedWatcher mMaskedWatcher just use mMaskedWatcher.getUnMaskedString().
+     * For getting unmasked text for default EditText just use formatter.formatString(text).getUnMaskedString().
      */
 
     // ===========================================================
@@ -38,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     // Fields
     // ===========================================================
 
+    private MaskedEditText mEdtMaskedCustom;
     private EditText mEdtMasked;
     private MaskedFormatter formatter;
 
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     // ===========================================================
 
     private void findViews() {
+        mEdtMaskedCustom = (MaskedEditText) findViewById(R.id.edt_masked_custom);
         mEdtMasked = (EditText) findViewById(R.id.edt_masked);
     }
 
@@ -85,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         formatter = new MaskedFormatter(mask);
         mEdtMasked.addTextChangedListener(new MaskedWatcher(formatter, mEdtMasked));
         String s = formatter.formatString(mEdtMasked.getText().toString()).getUnMaskedString();
+    }
+
+    private void getUnMaskedTextForEdtCustom() {
+        mEdtMaskedCustom.getUnMaskedText();
     }
 
     // ===========================================================
